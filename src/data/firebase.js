@@ -1,4 +1,5 @@
-// lib/firebase.js (veya utils/firebase.js)
+// src/data/firebase.js
+
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
@@ -7,8 +8,8 @@ const firebaseConfig = {
   authDomain: "PROJE.firebaseapp.com",
   projectId: "PROJE_ID",
   storageBucket: "PROJE.appspot.com",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID",
+  messagingSenderId: "GONDERICI_ID",
+  appId: "APP_ID"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+// src/components/SuccessPopup.jsx
 
 const SuccessPopup = ({ message, onClose }) => {
-  useEffect(() => {
-    const timer = setTimeout(onClose, 3000);
-    return () => clearTimeout(timer);
-  }, [onClose]);
-
   return (
-    <div className="fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg z-50 animate-slide-up">
-      {message}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+      <div className="bg-white text-black p-6 rounded-lg shadow-lg text-center max-w-md w-full">
+        <p className="mb-4 text-lg font-semibold">{message}</p>
+        <button onClick={onClose} className="btn btn-primary">
+          Kapat
+        </button>
+      </div>
     </div>
   );
 };
