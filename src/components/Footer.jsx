@@ -24,11 +24,11 @@ const Footer = () => {
     const button = document.getElementById("scrollToTop");
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
-        button.classList.remove("opacity-0");
-        button.classList.add("opacity-100");
+        button.classList.remove("opacity-0", "pointer-events-none");
+        button.classList.add("opacity-100", "pointer-events-auto");
       } else {
-        button.classList.add("opacity-0");
-        button.classList.remove("opacity-100");
+        button.classList.add("opacity-0", "pointer-events-none");
+        button.classList.remove("opacity-100", "pointer-events-auto");
       }
     };
     window.addEventListener("scroll", toggleVisibility);
@@ -36,15 +36,15 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="section relative bg-black text-white pt-12 pb-6">
-      <div className="container">
+    <footer className="section relative bg-black text-white pt-10 pb-8 px-4 sm:px-6 lg:px-0">
+      <div className="container mx-auto">
 
         {/* ÜST KISIM */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
 
           {/* Site Haritası */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Site Haritası</h3>
+            <h3 className="text-lg font-semibold mb-4">Site Haritası</h3>
             <ul>
               {sitemap.map(({ label, href }, index) => (
                 <li key={index}>
@@ -61,8 +61,8 @@ const Footer = () => {
 
           {/* Sosyal Medya */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Sosyal Medya</h3>
-            <div className="flex gap-4 text-xl">
+            <h3 className="text-lg font-semibold mb-4">Sosyal Medya</h3>
+            <div className="flex gap-6 text-2xl">
               {socials.map(({ icon, href }, index) => (
                 <a
                   key={index}
@@ -70,6 +70,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-zinc-400 hover:text-white transition"
+                  aria-label={`Gusto Damak Tadı ${sitemap[index]?.label || 'Sosyal Medya'}`}
                 >
                   {icon}
                 </a>
@@ -79,8 +80,8 @@ const Footer = () => {
 
           {/* Konum */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Konumumuz</h3>
-            <div className="w-full h-[300px] lg:h-[250px] overflow-hidden rounded-2xl shadow-lg">
+            <h3 className="text-lg font-semibold mb-4">Konumumuz</h3>
+            <div className="w-full h-64 md:h-56 overflow-hidden rounded-2xl shadow-lg">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3015.3856371460647!2d38.363341376294976!3d40.90728962563679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40636dfc3a7f4133%3A0x69af20fc537dadc1!2sGusto%20Giresun!5e0!3m2!1str!2str!4v1749941311833!5m2!1str!2str"
                 width="100%"
@@ -97,9 +98,9 @@ const Footer = () => {
         </div>
 
         {/* ALT KISIM */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-10 mt-8 border-t border-white/10">
-          <p className="text-zinc-500 text-sm text-center md:text-left">
-            &copy; 2025 <span className="text-white">Gusto Damak Tadı</span>. Tüm hakları saklıdır.
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 mt-10 border-t border-white/10 text-center md:text-left gap-3 md:gap-0">
+          <p className="text-zinc-500 text-sm">
+            &copy; 2025 <span className="text-white font-semibold">Gusto Damak Tadı</span>. Tüm hakları saklıdır.
           </p>
         </div>
       </div>
@@ -108,7 +109,7 @@ const Footer = () => {
       <button
         id="scrollToTop"
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 bg-[#e84242] hover:bg-[#c93c3c] text-white p-3 rounded-full shadow-lg opacity-0 transition-all duration-300 z-50"
+        className="fixed bottom-6 right-6 bg-[#e84242] hover:bg-[#c93c3c] text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50"
         aria-label="Yukarı çık"
       >
         <FaArrowUp />
