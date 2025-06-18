@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "scrollreveal";
-import { db } from "../data/firebase"; // Burayı kendi dosya yapına göre ayarla
+import { db } from "../data/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import SuccessPopup from "./SuccessPopup"; // Bileşeni oluşturduysan yolu doğru olmalı
 
 const whatsappNumber = "+905527072643";
 
@@ -9,6 +10,7 @@ const Contact = () => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const messageRef = useRef(null);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     ScrollReveal().reveal(".reveal-up", {
@@ -37,12 +39,10 @@ const Contact = () => {
 
     let valid = true;
 
-    // Basit validasyon ve hata animasyonu
     fields.forEach(({ ref }) => {
       if (!ref.current.value.trim()) {
         valid = false;
         ref.current.classList.add("shake", "border-red-500");
-
         setTimeout(() => {
           ref.current.classList.remove("shake", "border-red-500");
         }, 600);
@@ -52,7 +52,6 @@ const Contact = () => {
     if (!valid) return;
 
     try {
-      // Firestore'a gönderme
       await addDoc(collection(db, "contactMessages"), {
         name: nameRef.current.value.trim(),
         email: emailRef.current.value.trim(),
@@ -60,19 +59,19 @@ const Contact = () => {
         createdAt: serverTimestamp(),
       });
 
-      alert("Mesajınız başarıyla gönderildi!");
-      
-      // Formu temizle
+      setShowPopup(true);
       fields.forEach(({ ref }) => (ref.current.value = ""));
     } catch (error) {
-      alert("Mesaj gönderilirken hata oluştu. Lütfen tekrar deneyin.");
-      console.error("Firestore gönderim hatası:", error);
+      alert("Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.");
+      console.error("Firestore Hatası:", error);
     }
   };
 
   return (
     <section id="contact" className="section py-20">
       <div className="container grid lg:grid-cols-2 gap-12 items-start">
+
+        {/* SOL TARAF */}
         <div className="flex flex-col justify-between">
           <div>
             <h2 className="headline-2 lg:max-w-[12ch] reveal-up relative inline-block after:absolute after:-bottom-1 after:left-0 after:w-1/2 after:h-1 after:bg-red-500">
@@ -91,6 +90,7 @@ const Contact = () => {
           </div>
         </div>
 
+        {/* SAĞ TARAF - FORM */}
         <div className="xl:pl-10 2xl:pl-20 space-y-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="mb-4 reveal-up">
@@ -99,56 +99,52 @@ const Contact = () => {
 
             <div className="md:grid md:grid-cols-2 md:gap-4">
               <div className="mb-4">
-                <label htmlFor="name" className="label reveal-up">
-                  Adınız Soyadınız
-                </label>
+                <label htmlFor="name" className="label reveal-up">Adınız Soyadınız</label>
                 <input
                   type="text"
-                  name="name"
                   id="name"
-                  placeholder="Gusto Damak Tadı"
                   ref={nameRef}
+                  placeholder="Gusto Damak Tadı"
                   className="text-field reveal-up"
                 />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="email" className="label reveal-up">
-                  E-Posta
-                </label>
+                <label htmlFor="email" className="label reveal-up">E-Posta</label>
                 <input
                   type="email"
-                  name="email"
                   id="email"
-                  placeholder="kullanici@example.com"
                   ref={emailRef}
+                  placeholder="kullanici@example.com"
                   className="text-field reveal-up"
                 />
               </div>
             </div>
 
             <div className="mb-4">
-              <label htmlFor="message" className="label reveal-up">
-                Mesaj
-              </label>
+              <label htmlFor="message" className="label reveal-up">Mesaj</label>
               <textarea
-                name="message"
                 id="message"
-                placeholder="Önerileriniz!"
                 ref={messageRef}
+                placeholder="Önerileriniz!"
                 className="text-field resize-y min-h-32 max-h-80 reveal-up"
               />
             </div>
 
-            <button
-              type="submit"
-              className="btn btn-primary w-full justify-center reveal-up"
-            >
+            <button type="submit" className="btn btn-primary w-full justify-center reveal-up">
               📩 Gönder
             </button>
           </form>
         </div>
       </div>
+
+      {/* Başarılı gönderim popup */}
+      {showPopup && (
+        <SuccessPopup
+          message="Mesajınız başarıyla gönderildi 🎉"
+          onClose={() => setShowPopup(false)}
+        />
+      )}
     </section>
   );
 };
