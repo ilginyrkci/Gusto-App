@@ -91,7 +91,7 @@ const Navbar = ({ navOpen }) => {
 
   const navItems = [
     { label: "Ana Sayfa", link: "#home", className: "nav-link" },
-    { label: "Biz Kimim", link: "#about", className: "nav-link" },
+    { label: "Biz Kimiz", link: "#about", className: "nav-link" },
     { label: "Kadromuz", link: "#kadromuz", className: "nav-link" },
     { label: "Pastalarımız", link: "#cakes", className: "nav-link" },
     { label: "Bize Ulaşın", link: "#contact", className: "nav-link" },
