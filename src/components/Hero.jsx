@@ -49,7 +49,7 @@ const Hero = () => {
   }, []);
 
   const openWhatsApp = () => {
-    const message = encodeURIComponent("Merhaba, Gusto Damak Tadı hakkında bilgi almak istiyorum.");
+    const message = encodeURIComponent("Merhaba, Gusto Damak Tadının en lezziz yemekleri hakkında bilgi.");
     const url = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${message}`;
     window.open(url, "_blank");
   };
