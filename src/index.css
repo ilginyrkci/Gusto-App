@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-zinc-900 text-zinc-50;
+}
+.dark body {
+  @apply bg-zinc-50 text-zinc-900;
+}
+
+/* Başlıklar */
+.headline-1,
+.headline-2 {
+  @apply max-w-max;
+  /* Aydınlık mod gradient */
+  background: -webkit-linear-gradient(0deg, #fafafa, #a1a1aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Aydınlık modda .headline-1 içindeki span kırmızı */
+.headline-1 span {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: #e84242 !important;
+}
+
+/* Dark modda başlıklar için gradient veya düz renk */
+/* Burada transparent yaparken mutlaka -webkit-background-clip tanımı olmalı */
+.dark .headline-1,
+.dark .headline-2 {
+  background: -webkit-linear-gradient(0deg, #eeeeee, #555555);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Alternatif: Eğer gradient çok soluksa, aşağıdaki color satırını açabilirsin */
+  /* color: #f0f0f0; */
+}
+
+/* Dark modda span içi kırmızı */
+.dark .headline-1 span {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: #e84242 !important;
+}
+
+.headline-1 {
+  @apply text-5xl leading-tight font-semibold lg:text-[55px] lg:leading-[1.15];
+}
+
+.headline-2 {
+  @apply text-3xl lg:text-4xl lg:leading-tight font-semibold;
+}
+
+.title-1 {
+  @apply text-[22px] font-normal;
+}
+
+/* Material Symbols */
+.material-symbols-rounded {
+  @apply w-[1em] h-[1em] overflow-hidden;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* Container */
+.container {
+  @apply px-4 mx-auto lg:px-8 xl:max-w-6xl;
+}
+
+/* Görsel kutusu */
+.img-box {
+  @apply bg-zinc-700 overflow-hidden;
+}
+.dark .img-box {
+  @apply bg-zinc-300;
+}
+
+/* Görsel kaplama */
+.img-cover {
+  @apply w-full h-full object-cover;
+}
+
+/* Section */
+.section {
+  @apply pt-20 lg:pt-32;
+}
+
+/* Reveal animasyon */
+.reveal-up {
+  @apply translate-y-20 opacity-0;
+}
+
+/* Menü butonu */
+.menu-btn {
+  @apply w-10 h-10 grid place-items-center bg-zinc-50/10 rounded-xl ring-inset ring-1 ring-zinc-50/[0.02] backdrop-blur-2xl hover:bg-zinc-50/15 transition-[transform,background-color] active:scale-95 text-zinc-50;
+}
+.dark .menu-btn {
+  @apply text-zinc-900 bg-zinc-900/10 ring-zinc-900/[0.05] hover:bg-zinc-900/15;
+}
+
+/* Navbar */
+.navbar {
+  @apply absolute top-full mt-2 right-0 min-w-40 p-2 bg-zinc-50/10 rounded-2xl ring-inset ring-1 ring-zinc-50/5 scale-90 isolate blur-sm opacity-0 invisible transition-[opacity,transform,filter] md:static md:flex md:items-center md:mt-0 md:opacity-100 md:blur-0 md:visible md:scale-100 backdrop-blur-2xl text-zinc-50;
+}
+.dark .navbar {
+  @apply bg-zinc-900/90 ring-zinc-900/40 text-zinc-200;
+}
+
+.navbar.active {
+  @apply opacity-100 scale-100 blur-0 visible;
+}
+
+/* Nav link */
+.nav-link {
+  @apply grid items-center h-9 px-4 text-sm font-medium tracking-wide text-zinc-50/50 hover:text-zinc-50 transition-colors;
+}
+.dark .nav-link {
+  @apply text-zinc-300 hover:text-zinc-100;
+}
+
+.nav-link.active {
+  @apply text-zinc-900 duration-500;
+}
+.dark .nav-link.active {
+  @apply text-zinc-50 duration-500;
+}
+
+/* Navbar aktif kutusu */
+.navbar .active-box {
+  @apply absolute bg-zinc-50 rounded-lg -z-10 transition-[top,left] duration-500;
+}
+.dark .navbar .active-box {
+  @apply bg-zinc-700;
+}
+
+/* Butonlar */
+.btn {
+  @apply max-w-max h-9 flex items-center gap-2 px-4 rounded-xl font-medium text-sm ring-1 ring-zinc-50/5 ring-inset transition-[background-color];
+}
+.dark .btn {
+  @apply ring-zinc-900/20;
+}
+
+.btn-secondary {
+  @apply bg-zinc-50 text-zinc-900 active:bg-zinc-50/80;
+}
+.dark .btn-secondary {
+  @apply bg-zinc-900 text-zinc-50 active:bg-zinc-900/80;
+}
+
+.btn .material-symbols-rounded {
+  @apply text-[18px];
+}
+
+.btn:has( .material-symbols-rounded) {
+  @apply pr-3;
+}
+
+.btn-primary {
+  @apply h-11 bg-[#e84242] text-zinc-950 hover:bg-[#ff5f5f] active:bg-[#ff5f5f];
+}
+.dark .btn-primary {
+  @apply bg-[#d73838] text-zinc-100 hover:bg-[#ff5f5f] active:bg-[#ff5f5f];
+}
+
+.btn-outline {
+  @apply h-11 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-800;
+}
+.dark .btn-outline {
+  @apply bg-zinc-200 hover:bg-zinc-300 active:bg-zinc-200;
+}
+
+/* Etiket */
+.label {
+  @apply block text-zinc-200 text-sm font-normal mb-2;
+}
+.dark .label {
+  @apply text-zinc-800;
+}
+
+/* Input alanları */
+.text-field {
+  @apply block outline-none w-full px-3 py-3 text-sm bg-zinc-800 rounded-xl ring-1 ring-inset ring-transparent transition-shadow hover:ring-zinc-50/5 focus:ring-rose-500 focus:ring-2 text-zinc-50;
+}
+.dark .text-field {
+  @apply bg-zinc-100 text-zinc-900 ring-zinc-300 hover:bg-[#ff5f5f] focus:ring-rose-500;
+}
+
+.text-field::placeholder {
+  @apply text-zinc-400;
+}
+.dark .text-field::placeholder {
+  @apply text-zinc-500;
+}
+
+/* Animasyonlar */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid gray;
+  animation: typing 3s steps(10, end) forwards, blink 0.3s infinite;
+}
+.dark .typewriter {
+  border-right-color: #ffffff;
+}
+.btn-green {
+  @apply h-11 bg-[#d73838] text-white rounded-xl font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#ff5f5f] active:bg-[#ff5f5f] transition-colors;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
