@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { FaInstagram, FaFacebookF, FaXTwitter, FaArrowUp } from "react-icons/fa6";
 
+// Sayfa içi bağlantılar
 const sitemap = [
   { label: 'Ana Sayfa', href: '#home' },
   { label: 'Biz Kimiz', href: '#about' },
@@ -9,6 +10,7 @@ const sitemap = [
   { label: 'Bize Ulaşın', href: '#contact' }
 ];
 
+// Sosyal medya ikonları ve bağlantıları
 const socials = [
   { icon: <FaInstagram />, href: 'https://www.instagram.com/gustogiresun/' },
   { icon: <FaFacebookF />, href: 'https://www.facebook.com/profile.php?id=100077483986040' },
@@ -16,22 +18,31 @@ const socials = [
 ];
 
 const Footer = () => {
+  // Sayfanın en üstüne yumuşak kaydırma fonksiyonu
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Scroll durumuna göre yukarı çık butonunun görünürlüğünü kontrol eder
   useEffect(() => {
     const button = document.getElementById("scrollToTop");
+
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
+        // 300px aşağı inildiyse butonu göster
         button.classList.remove("opacity-0", "pointer-events-none");
         button.classList.add("opacity-100", "pointer-events-auto");
       } else {
+        // Yukarıdaysa butonu gizle
         button.classList.add("opacity-0", "pointer-events-none");
         button.classList.remove("opacity-100", "pointer-events-auto");
       }
     };
+
+    // Scroll event listener ekle
     window.addEventListener("scroll", toggleVisibility);
+
+    // Temizlik: component unmount olduğunda event listener'ı kaldır
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
@@ -39,10 +50,10 @@ const Footer = () => {
     <footer className="section relative bg-black text-white pt-10 pb-8 px-4 sm:px-6 lg:px-0">
       <div className="container mx-auto">
 
-        {/* ÜST KISIM */}
+        {/* ÜST KISIM - 3 Kolonlu Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
 
-          {/* Site Haritası */}
+          {/* Site Haritası Bölümü */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Site Haritası</h3>
             <ul>
@@ -59,7 +70,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Sosyal Medya */}
+          {/* Sosyal Medya İkonları */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Sosyal Medya</h3>
             <div className="flex gap-6 text-2xl">
@@ -78,7 +89,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Konum */}
+          {/* Google Maps Entegreli Konum */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Konumumuz</h3>
             <div className="w-full h-64 md:h-56 overflow-hidden rounded-2xl shadow-lg">
@@ -97,7 +108,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* ALT KISIM */}
+        {/* ALT KISIM - Telif Hakkı */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 mt-10 border-t border-white/10 text-center md:text-left gap-3 md:gap-0">
           <p className="text-zinc-500 text-sm">
             &copy; 2025 <span className="text-white font-semibold">Gusto Damak Tadı</span>. Tüm hakları saklıdır.

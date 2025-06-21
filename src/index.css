@@ -17,31 +17,24 @@ body {
 .headline-1,
 .headline-2 {
   @apply max-w-max;
-  /* Aydınlık mod gradient */
   background: -webkit-linear-gradient(0deg, #fafafa, #a1a1aa);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Aydınlık modda .headline-1 içindeki span kırmızı */
 .headline-1 span {
   background: none !important;
   -webkit-text-fill-color: initial !important;
   color: #e84242 !important;
 }
 
-/* Dark modda başlıklar için gradient veya düz renk */
-/* Burada transparent yaparken mutlaka -webkit-background-clip tanımı olmalı */
 .dark .headline-1,
 .dark .headline-2 {
   background: -webkit-linear-gradient(0deg, #eeeeee, #555555);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* Alternatif: Eğer gradient çok soluksa, aşağıdaki color satırını açabilirsin */
-  /* color: #f0f0f0; */
 }
 
-/* Dark modda span içi kırmızı */
 .dark .headline-1 span {
   background: none !important;
   -webkit-text-fill-color: initial !important;
@@ -116,22 +109,23 @@ body {
 
 /* Nav link */
 .nav-link {
-  @apply grid items-center h-9 px-4 text-sm font-medium tracking-wide text-zinc-50/50 hover:text-zinc-50 transition-colors;
+  @apply grid items-center h-9 px-4 text-sm font-medium tracking-wide text-zinc-50/50 hover:text-zinc-50 transition-colors cursor-pointer;
 }
 .dark .nav-link {
   @apply text-zinc-300 hover:text-zinc-100;
 }
 
 .nav-link.active {
-  @apply text-zinc-900 duration-500;
+  @apply text-zinc-900 font-semibold duration-500;
 }
 .dark .nav-link.active {
-  @apply text-zinc-50 duration-500;
+  @apply text-zinc-50 font-semibold duration-500;
 }
 
 /* Navbar aktif kutusu */
 .navbar .active-box {
-  @apply absolute bg-zinc-50 rounded-lg -z-10 transition-[top,left] duration-500;
+  @apply absolute bg-zinc-50 rounded-lg -z-10 transition-all duration-500 ease-in-out;
+  /* Genişlik ve yükseklik animasyonlarını JS tarafında ayarladığın için burada sadece geçişi açıyoruz */
 }
 .dark .navbar .active-box {
   @apply bg-zinc-700;

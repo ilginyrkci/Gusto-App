@@ -1,10 +1,13 @@
+/**
+ *
+ * @license Apache-2.0
+ */
+
 import { ReactLenis } from 'lenis/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
 import { BrowserRouter } from "react-router-dom"; 
-import { CartProvider } from "./context/CartContext.jsx";
-
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 import Header from "./components/Header";
@@ -30,27 +33,25 @@ const App = () => {
         opacity: 1,
         duration: 1,
         ease: 'power2.out'
-      });
+      })
     });
   });
 
   return (
-    <BrowserRouter>
-      <CartProvider>
-        <ReactLenis root>
-          <Header />
-          <main>
-            <section id="home"><Hero /></section>
-            <section id="about"><About /></section>
-            <section id="kadromuz"><ChefTeam /></section>
-            <section id="cakes"><Cake /></section>
-            <section id="contact"><Contact /></section>
-          </main>
-          <Footer />
-        </ReactLenis>
-      </CartProvider>
+    <BrowserRouter> {/* Burada sarmalıyoruz */}
+      <ReactLenis root>
+        <Header />
+        <main>
+          <section id="home" ><Hero /> </section>
+          <section id="about"><About /></section>
+          <section id="kadromuz"><ChefTeam /></section>
+          <section id="Menümüz"><Cake /></section>
+          <section id="contact"><Contact /></section> 
+        </main>
+        <Footer />
+      </ReactLenis>
     </BrowserRouter>
   );
-};
+}
 
 export default App;

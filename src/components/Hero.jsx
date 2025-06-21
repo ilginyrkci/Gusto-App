@@ -1,100 +1,52 @@
-import { useEffect } from "react";
-import ScrollReveal from "scrollreveal";
-import Typed from "typed.js";
-
-const whatsappNumber = "+905527072643";
+import { FaInstagram, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 
 const Hero = () => {
-  useEffect(() => {
-    ScrollReveal({
-      reset: true,
-      distance: "80px",
-      duration: 2000,
-      delay: 200,
-    });
-
-    ScrollReveal().reveal(".hero-text", { 
-      origin: "left", 
-      distance: "100px", 
-      duration: 2000,
-      delay: 300,
-      easing: "ease-in-out",
-      opacity: 0,
-    });
-
-    ScrollReveal().reveal(".hero-image", { 
-      origin: "top", 
-      distance: "50px", 
-      duration: 2200,
-      delay: 500,
-      easing: "ease-in-out",
-      opacity: 0,
-    });
-
-    const typed = new Typed(".typed-text", {
-      strings: ["En güncel yemekler", "En lezzetli tarifler", "En özel anlar"],
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 1000,
-      loop: true,
-      showCursor: true,
-      cursorChar: "|",
-      fadeOut: true,
-      fadeOutDelay: 500,
-    });
-
-    return () => {
-      typed.destroy();
-    };
-  }, []);
-
-  const openWhatsApp = () => {
-    const message = encodeURIComponent("Merhaba, Gusto Damak Tadının en lezziz yemekleri hakkında bilgi.");
-    const url = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${message}`;
-    window.open(url, "_blank");
-  };
-
   return (
-    <section id="home" className="pt-20 lg:pt-36 px-4 sm:px-6 lg:px-0">
-      <div className="container mx-auto flex flex-col lg:grid lg:grid-cols-2 lg:gap-10 items-center">
-        
-        {/* Yazı kısmı */}
-        <div className="hero-text text-center lg:text-left mb-10 lg:mb-0">
-          <h2 className="headline-1 max-w-[20ch] sm:max-w-[30ch] mx-auto lg:mx-0 mt-5 mb-6 lg:mb-10 text-3xl sm:text-4xl lg:text-5xl font-extrabold">
-            <span>Gusto Damak Tadı</span> 
-          </h2>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#e84242] mb-6">
-            <span className="typed-text"></span>
-          </h2>
+    <section
+      className="relative w-full h-screen bg-gray-800 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url('/public/images/anasayfa.jpg')` }} // Arka plan resmi
+    >
+      {/* Karartma katmanı */}
+      <div className="absolute inset-0 bg-black/30 z-0" />
 
-          {/* WhatsApp Butonu */}
-          <div>
-            <button
-              onClick={openWhatsApp}
-              className="btn btn-green px-6 py-3 rounded-xl font-semibold text-white bg-green-600 hover:bg-green-700 active:bg-green-800 transition inline-flex items-center justify-center mx-auto lg:mx-0"
-            >
-              📲 WhatsApp'tan Yaz
-            </button>
-          </div>
-        </div>
+      {/* İçerik alanı (tam ortalanmış) */}
+      <div className="relative z-10 flex flex-col justify-center items-center text-center h-full px-6 pb-10">
+        {/* Başlık */}
+        <h1 className="text-4xl sm:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+          Gusto Damak Tadı
+        </h1>
 
-        {/* Resim kısmı */}
-        <div className="hero-image w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[480px] mx-auto bg-gradient-to-t from-rose-500 via-25% via-rose-400/40 to-65% rounded-[30px] lg:rounded-[60px] overflow-hidden hover:scale-105 transition-transform duration-500 ease-in-out">
-          <img
-            src="/images/anasayfa.jpg"
-            alt="Gusto Damak Tadı"
-            className="w-full h-auto object-cover"
-            loading="lazy"
-          />
+        {/* Alt açıklama */}
+        <p className="text-lg sm:text-xl text-white mb-4 max-w-xl">
+          Geleneksel tarifler, modern dokunuşlarla buluşuyor. Gusto ile lezzeti yeniden keşfedin.
+        </p>
+
+        {/* CTA Mesajı */}
+        <p className="text-lg sm:text-xl text-white mb-4 font-medium">
+          Lezzeti hemen keşfetmek için bizimle iletişime geç!
+        </p>
+
+        {/* Buton */}
+        <a
+          href="#contact"
+          className="bg-[#02521f] text-white text-lg px-6 py-3 rounded-full shadow-md hover:scale-105 transition-transform duration-300 animate-heartbeat"
+        >
+          Bizimle İletişime Geç
+        </a>
+
+        {/* Sosyal medya ikonları */}
+        <div className="flex justify-center gap-4 mt-6">
+          <a href="https://instagram.com/gusto" target="_blank" rel="noopener noreferrer">
+            <FaInstagram className="text-2xl text-[#e84242] hover:scale-110 transition-transform" />
+          </a>
+          <a href="https://facebook.com/gusto" target="_blank" rel="noopener noreferrer">
+            <FaFacebookF className="text-2xl text-white hover:scale-110 transition-transform" />
+          </a>
+          <a href="https://twitter.com/gusto" target="_blank" rel="noopener noreferrer">
+            <FaXTwitter className="text-2xl text-white hover:scale-110 transition-transform" />
+          </a>
         </div>
       </div>
-
-      <style>{`
-        .typed-cursor {
-          color: #e84242;
-          font-weight: bold;
-        }
-      `}</style>
     </section>
   );
 };
