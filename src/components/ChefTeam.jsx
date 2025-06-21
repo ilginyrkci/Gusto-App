@@ -3,7 +3,7 @@ import ScrollReveal from "scrollreveal";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
 const chefs = [
-    {
+  {
     name: "Kurucumuz Yalçın Zehir",
     image: "/public/images/sefler/yalcin.jpg",
     bio: "Kurucumuz Yalçın ZEHİR .",
@@ -17,20 +17,20 @@ const chefs = [
     ]
   },
   {
-   name: "Fronted Developer Ilgın Habibe Yürekçi",
-   image: "/public/images/sefler/ilgin.jpg",
-   bio: "Gusto Damak Tadında 2024 ten beri Fronted Developer olarak görev yapmaktadır.",
-   since: 2024,
-   stars: 4,
-   socials: {
-     instagram: "https://www.instagram.com/ilginyurekci/",
-     linkedin: "https://www.linkedin.com/in/ilg%C4%B1n-habibe-y%C3%BCrek%C3%A7i-188ba5279/",
-   },
-   reviews: [
-     { user: "Zehra", comment: "Kullanıcı dostu değil" },
-     { user: "Asiye", comment: "Profosyonel olma yolunda" },
-  ]
-  },   
+    name: "Fronted Developer Ilgın Habibe Yürekçi",
+    image: "/public/images/sefler/ilgin.jpg",
+    bio: "Gusto Damak Tadında 2024 ten beri Fronted Developer olarak görev yapmaktadır.",
+    since: 2024,
+    stars: 4,
+    socials: {
+      instagram: "https://www.instagram.com/ilginyurekci/",
+      linkedin: "https://www.linkedin.com/in/ilg%C4%B1n-habibe-y%C3%BCrek%C3%A7i-188ba5279/",
+    },
+    reviews: [
+      { user: "Zehra", comment: "Kullanıcı dostu değil" },
+      { user: "Asiye", comment: "Profosyonel olma yolunda" },
+    ]
+  },
   {
     name: "Müdürümüz Veysel Guguk",
     image: "/public/images/sefler/veysel.png",
@@ -44,7 +44,7 @@ const chefs = [
       { user: "Mert", comment: "Disiplini harikadır" }
     ]
   },
-    {
+  {
     name: "Şef Eyüp Güner",
     image: "/public/images/sefler/eyup.png",
     bio: "Açıldığı Yıldan beridir Gusto Damak Tadı'nda şeflik yapıyor.",
@@ -56,9 +56,36 @@ const chefs = [
     reviews: [
       { user: "Zeynep", comment: "Efsane Pastaları!" },
       { user: "Can", comment: "Gerçek bir şef!" },
-]
-  },   
-
+    ]
+  },
+  {
+    name: "Şef Ferdi Henden",
+    image: "/public/images/sefler/ferdi.png",
+    bio: "Açıldığı Yıldan beridir Gusto Damak Tadı'nda Pasta Ustalığı yapıyor.",
+    since: 2022,
+    stars: 3,
+    socials: {
+      instagram: "https://www.instagram.com/ferdihendenn/"
+    },
+    reviews: [
+      { user: "Zeynep", comment: "Efsane Pastaları!" },
+      { user: "Can", comment: "Gerçek bir şef!" },
+    ]
+  },
+  {
+    name: "Şef Adem Bektaş",
+    image: "/public/images/sefler/adem.png",
+    bio: "Açıldığı Yıldan beridir Gusto Damak Tadı'nda ekmek ustalığı yapıyor.",
+    since: 2022,
+    stars: 3,
+    socials: {
+      instagram: "https://www.instagram.com/breadchef61/"
+    },
+    reviews: [
+      { user: "Zeynep", comment: "Zeytinli Domatesli ekmeği mükemmel ötesi" },
+      { user: "Can", comment: "Gerçek bir şef!" },
+    ]
+  },
 ];
 
 const ChefTeam = () => {
@@ -72,7 +99,7 @@ const ChefTeam = () => {
       interval: 200
     });
   }, []);
-    
+
   const renderStars = (count) => {
     return (
       <>
@@ -88,7 +115,7 @@ const ChefTeam = () => {
   };
 
   return (
-    <section className="section bg-white text-black">
+    <section className="section bg-white text-black pb-12">
       <div className="container">
         <h2 className="headline-2 mb-4">Profesyonel Kadromuz</h2>
         <div className="grid gap-6 grid-cols-[repeat(auto-fill,_minmax(280px,_1fr))]">
@@ -118,7 +145,7 @@ const ChefTeam = () => {
               >
                 Instagram profili
               </a>
-          
+
               <div className="mt-3">
                 <p className="text-sm font-medium text-zinc-700">Yorumlar:</p>
                 <ul className="text-sm text-zinc-500 list-disc ml-4 mt-1">

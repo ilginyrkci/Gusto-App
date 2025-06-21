@@ -2,16 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "scrollreveal";
 import { db } from "../data/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import SuccessPopup from "./SuccessPopup"; // Bileşeni oluşturduysan yolu doğru olmalı
+import SuccessPopup from "./SuccessPopup"; // Başarılı gönderim popup bileşeni
 
-const whatsappNumber = "+905527072643";
+const whatsappNumber = "+905527072643"; // WhatsApp numarası
 
 const Contact = () => {
+  // input ve textarea referansları
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const messageRef = useRef(null);
+
+  // popup gösterimi için state
   const [showPopup, setShowPopup] = useState(false);
 
+  // ScrollReveal animasyonlarını başlatır
   useEffect(() => {
     ScrollReveal().reveal(".reveal-up", {
       duration: 800,
@@ -22,15 +26,18 @@ const Contact = () => {
     });
   }, []);
 
+  // WhatsApp mesaj penceresini açan fonksiyon
   const openWhatsApp = () => {
     const message = encodeURIComponent("Merhaba, Gusto Damak Tadı ile iletişime geçmek istiyorum.");
     const url = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${message}`;
     window.open(url, "_blank");
   };
 
+  // Form gönderim işlemi
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Kontrol edilecek inputlar ve isimleri
     const fields = [
       { ref: nameRef, name: "Adınız" },
       { ref: emailRef, name: "E-posta" },
@@ -39,6 +46,7 @@ const Contact = () => {
 
     let valid = true;
 
+    // Boş inputları kontrol et ve hatalıysa animasyon ve kırmızı border uygula
     fields.forEach(({ ref }) => {
       if (!ref.current.value.trim()) {
         valid = false;
@@ -49,9 +57,11 @@ const Contact = () => {
       }
     });
 
+    // Eğer form geçerli değilse gönderimi durdur
     if (!valid) return;
 
     try {
+      // Firestore'a mesajı kaydet
       await addDoc(collection(db, "contactMessages"), {
         name: nameRef.current.value.trim(),
         email: emailRef.current.value.trim(),
@@ -59,6 +69,7 @@ const Contact = () => {
         createdAt: serverTimestamp(),
       });
 
+      // Başarılı popup göster, formu temizle
       setShowPopup(true);
       fields.forEach(({ ref }) => (ref.current.value = ""));
     } catch (error) {
@@ -68,10 +79,11 @@ const Contact = () => {
   };
 
   return (
+    // Ana section alanı
     <section id="contact" className="section py-20">
       <div className="container grid lg:grid-cols-2 gap-12 items-start">
 
-        {/* SOL TARAF */}
+        {/* Sol taraf - başlık, açıklama, WhatsApp butonu */}
         <div className="flex flex-col justify-between">
           <div>
             <h2 className="headline-2 lg:max-w-[12ch] reveal-up relative inline-block after:absolute after:-bottom-1 after:left-0 after:w-1/2 after:h-1 after:bg-red-500">
@@ -90,13 +102,14 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* SAĞ TARAF - FORM */}
+        {/* Sağ taraf - iletişim formu */}
         <div className="xl:pl-10 2xl:pl-20 space-y-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="mb-4 reveal-up">
               <p className="text-sm text-zinc-500">Formu doldurarak bize mesaj gönderebilirsiniz.</p>
             </div>
 
+            {/* İsim ve e-posta alanları */}
             <div className="md:grid md:grid-cols-2 md:gap-4">
               <div className="mb-4">
                 <label htmlFor="name" className="label reveal-up">Adınız Soyadınız</label>
@@ -121,6 +134,7 @@ const Contact = () => {
               </div>
             </div>
 
+            {/* Mesaj alanı */}
             <div className="mb-4">
               <label htmlFor="message" className="label reveal-up">Mesaj</label>
               <textarea
@@ -131,6 +145,7 @@ const Contact = () => {
               />
             </div>
 
+            {/* Gönder butonu */}
             <button type="submit" className="btn btn-primary w-full justify-center reveal-up">
               📩 Gönder
             </button>
